@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-// Import axios
-import axios from 'axios';
+import api from './api/axiosConfig';
 
 function App() {
   const [data, setData] = useState([]);
@@ -9,7 +8,7 @@ function App() {
 
   useEffect(() => {
     // Fetch data from the API
-    axios.get('https://booking-management-system.azurewebsites.net/api/HttpExample')
+    api.get('/HttpExample')
       .then((response) => {
         console.log(response.data);
         setData(response.data);

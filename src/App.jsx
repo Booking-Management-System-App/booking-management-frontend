@@ -1,30 +1,26 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import api from './api/axiosConfig';
+//import { useState, useEffect } from 'react';
+import './App.css';
+//import api from './api/axiosConfig';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import DateSelection from './components/DateSelection';
 
 function App() {
-  const [data, setData] = useState([]);
-
-
-  useEffect(() => {
-    // Fetch data from the API
-    api.get('/HttpExample')
-      .then((response) => {
-        console.log(response.data);
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-      });
-  }, []);
 
   return (
     <>
-      <div>
-        {data}
-      </div>
+      <Container fluid>
+        <Row>
+          <Col xs={6}>
+            <DateSelection />
+          </Col>
+        </Row>
+      </Container>
     </>
   )
 }
 
-export default App
+export default App;

@@ -1,7 +1,29 @@
-.dateSelectionContainer {
+.dateSelectionCard {
   background-color: #D4E0E8;
 }
 
-.monthBadge {
-    font-size: 1.2rem !important;
+.monthButton {
+    font-size: 1.1rem !important;
+    /* background-color: black !important; */
+    /* color: white; */
+    border-radius: 20px !important;
+    width: 100px;
+    height: 40px;
+}
+
+.monthButton:hover {
+    background-color: white !important;
+    color: black !important;
+}
+
+.dayButton {
+    font-size: 1.1rem !important;
+    border-radius: 25px !important;
+    width: 50px;
+    height: 50px;
+}
+
+.dayButton:hover {
+  background-color: white !important;
+  color: black !important;
 }

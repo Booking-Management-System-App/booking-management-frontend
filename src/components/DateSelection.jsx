@@ -62,7 +62,7 @@ function DateSelection() {
           {Array.from({ length: 6 }).map((_, idx) => (
               <Row key={idx} className="m-auto justify-content-between px-5 py-2 daysOfMonthRow">
               {Array.from({ length: 7 }).map((_, idy) => (
-                  <Col key={(idx * 7) + idy + 1 - firstDayOfWeek} xs={1} className="p-0">
+                  <Col key={(idx * 7) + idy + 1 - firstDayOfWeek} xs={1} className="p-0 text-center">
                     <Button
                       variant="dark"
                       text="light"

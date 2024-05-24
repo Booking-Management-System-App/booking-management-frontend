@@ -23,7 +23,7 @@ function App() {
             <Row className="h-50">
               <TimeSelection />
             </Row>
-            <Row className="h-50">
+            <Row className="mh-50">
               <ConfirmAppointmentCard />
             </Row>
           </Col>

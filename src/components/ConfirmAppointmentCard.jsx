@@ -1,23 +1,16 @@
 import { useState } from 'react';
 //import api from '../api/axiosConfig';
-import '../styles/timeSelection.css';
+import '../styles/confirmAppointmentCard.css';
 
-//import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-//import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-//import { getDay } from "date-fns";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { FaCheck } from "react-icons/fa";
 
-//import dateSelectionData from '../data/dateSelectionData.json';
-
 function ConfirmAppointmentCard() {
-  //const today = new Date();
-  //const day = getDay(today);
 
   const [charCount, setCharCount] = useState(0);
 
@@ -69,24 +62,24 @@ function ConfirmAppointmentCard() {
               </Form.Group>
             </Row>
             <Row>
-              <FloatingLabel
-                controlId="floatingInputDetails"
-                label="Additional details"
-                className="mb-2"
-              >
-                <Form.Control
-                  as="textarea"
-                  rows={2}
-                  maxLength={100}
-                  placeholder="Additional details"
-                  onChange={(e) => setCharCount(e.target.value.length)}
-                  className="mh-25"
-                />
-                {/* Add a counter for the number of characters entered */}
-                <Form.Text className="text-muted text-left">
-                  {charCount}/100
-                </Form.Text>
-              </FloatingLabel>
+              <Form.Group as={Col} controlId="detailsInput">
+                <FloatingLabel
+                  controlId="floatingInputDetails"
+                  label="Details"
+                >
+                  <Form.Control
+                    as="textarea"
+                    maxLength={100}
+                    placeholder="Details"
+                    onChange={(e) => setCharCount(e.target.value.length)}
+                    className="confirmAppointmentDetailsInput"
+                  />
+                  {/* Add a counter for the number of characters entered */}
+                  <Form.Text className="text-muted text-left">
+                    {charCount}/100
+                  </Form.Text>
+                </FloatingLabel>
+              </Form.Group>
             </Row>
             <Row>
               <Button variant="dark" type="submit" className="w-25 m-auto">

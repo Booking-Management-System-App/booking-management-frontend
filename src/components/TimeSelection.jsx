@@ -1,4 +1,4 @@
-//import { useState, useEffect } from 'react';
+import { useState } from 'react';
 //import api from '../api/axiosConfig';
 import '../styles/timeSelection.css';
 
@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function TimeSelection() {
+
+  const [selectedTime, setSelectedTime] = useState(0);
 
   const times = [
     "8:00 AM",
@@ -26,7 +28,7 @@ function TimeSelection() {
 
   return (
     <>
-      <Card bg="light" text="dark" className="dateSelectionCard mt-2">
+      <Card bg="light" text="dark" className="timeSelectionCard mt-2">
         <Card.Body>
           <Card.Title className="text-center">Select a time</Card.Title>
           <Row className="justify-content-center">
@@ -35,7 +37,8 @@ function TimeSelection() {
                   <Button
                     variant="dark"
                     text="light"
-                    className="monthButton"
+                    className={selectedTime === idx ? "timeButton active" : "timeButton"}
+                    onClick={() => setSelectedTime(idx)}
                   >
                     {time}
                   </Button>

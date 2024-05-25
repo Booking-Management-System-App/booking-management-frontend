@@ -1,0 +1,15 @@
+.timeSelectionCard {
+  background-color: #D4E0E8;
+}
+
+.timeButton {
+    font-size: 1rem !important;
+    border-radius: 20px !important;
+    width: 100px;
+    height: 40px;
+}
+
+.timeButton.active {
+    background-color: white !important;
+    color: black !important;
+}

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 //import api from '../api/axiosConfig';
 import '../styles/confirmAppointmentCard.css';
 
@@ -10,7 +11,9 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { FaCheck } from "react-icons/fa";
 
-function ConfirmAppointmentCard() {
+function ConfirmAppointmentCard(props) {
+
+  const {selectedTime} = props;
 
   const [charCount, setCharCount] = useState(0);
 
@@ -20,6 +23,9 @@ function ConfirmAppointmentCard() {
         <Card.Body>
           <Card.Title className="text-center">Confirm your appointment</Card.Title>
           <Form>
+            <Row>
+              <p className="text-left fw-bold">Time: {selectedTime}</p>
+            </Row>
             <Row>
               <Form.Group as={Col} controlId="firstNameInput">
                 <FloatingLabel
@@ -92,5 +98,9 @@ function ConfirmAppointmentCard() {
     </>
   );
 }
+
+ConfirmAppointmentCard.propTypes = {
+  selectedTime: PropTypes.string,
+};
 
 export default ConfirmAppointmentCard;

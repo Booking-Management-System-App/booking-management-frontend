@@ -11,7 +11,7 @@ import Card from 'react-bootstrap/Card';
 import dateSelectionData from '../data/dateSelectionData.json';
 
 function DateSelection() {
-  const today = new Date(2024, 5, 1);
+  const today = new Date();
   const month = today.getMonth() + 1;
   const day = today.getDate();
 

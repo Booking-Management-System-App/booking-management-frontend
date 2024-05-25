@@ -11,7 +11,7 @@ import Card from 'react-bootstrap/Card';
 import dateSelectionData from '../data/dateSelectionData.json';
 
 function DateSelection() {
-  const today = new Date();
+  const today = new Date(2024, 5, 1);
   const month = today.getMonth() + 1;
   const day = today.getDate();
 
@@ -26,7 +26,7 @@ function DateSelection() {
 
   return (
     <>
-      <Card bg="light" text="dark" className="dateSelectionCard mt-2 py-0">
+      <Card bg="light" text="dark" className="dateSelectionCard mt-2 py-0 h-100">
         <Card.Body>
           <Card.Title className="justify-content-between d-flex px-4"><p>Select a date</p><p>2024</p></Card.Title>
             <Container>
@@ -50,7 +50,7 @@ function DateSelection() {
             ))}
             </Container>
           <Row className="blankRow my-3"></Row>
-          <Row className='m-auto justify-content-between daysOfTheWeek pb-3 px-5'>
+          <Row className='m-auto justify-content-between daysOfTheWeek pb-1 px-5'>
               <Col xs={1} className="day text-center">S</Col>
               <Col xs={1} className="day text-center">M</Col>
               <Col xs={1} className="day text-center">T</Col>
@@ -60,7 +60,7 @@ function DateSelection() {
               <Col xs={1} className="day text-center">S</Col>
           </Row>
           {Array.from({ length: 6 }).map((_, idx) => (
-              <Row key={idx} className="m-auto justify-content-between px-5 py-2 daysOfMonthRow">
+              <Row key={idx} className="m-auto justify-content-between px-5 py-1 daysOfMonthRow">
               {Array.from({ length: 7 }).map((_, idy) => (
                   <Col key={(idx * 7) + idy + 1 - firstDayOfWeek} xs={1} className="p-0 text-center">
                     <Button
@@ -72,12 +72,12 @@ function DateSelection() {
                         ? (
                           selectedDay === (idx * 7) + idy + 1 - firstDayOfWeek
                           ? (
-                            "my-2 dayButton active"
+                            "mt-2 dayButton active"
                           ) : (
-                            "my-2 dayButton"
+                            "mt-2 dayButton"
                           )
                         ) : (
-                          "my-2 dayButton d-none"
+                          "mt-2 dayButton d-none"
                         )
                       }
                       onClick={() => setSelectedDay((idx * 7) + idy + 1 - firstDayOfWeek)}

@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { FaCheck } from "react-icons/fa";
+import Badge from 'react-bootstrap/Badge';
 
 function ConfirmAppointmentCard(props) {
 
@@ -24,7 +25,7 @@ function ConfirmAppointmentCard(props) {
           <Card.Title className="text-center">Confirm your appointment</Card.Title>
           <Form>
             <Row>
-              <p className="text-left fw-bold">Time: {selectedTime}</p>
+              <p className="text-left">Time: <Badge pill bg="dark" className="m-auto timeBadge">{selectedTime}</Badge></p>
             </Row>
             <Row>
               <Form.Group as={Col} controlId="firstNameInput">

@@ -1,8 +1,6 @@
-html, body {
-  height: 100%; /* Make html and body take full height of the viewport */
-}
-
-#root {
-  height: 100%; /* Expand the root and container to full height */
+html, body, #root, .app-container {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: #444141;
 }

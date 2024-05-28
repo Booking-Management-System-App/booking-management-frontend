@@ -26,6 +26,7 @@ function DateSelection() {
   const [selectedMonth, setSelectedMonth] = useState(month);
   const [selectedDay, setSelectedDay] = useState(day);
 
+  // Update the days in the month when a new month is selected
   const updateDaysInMonth = (month) => {
     setSelectedMonth(month + 1);
     setSelectedDay(1);
@@ -34,7 +35,6 @@ function DateSelection() {
     setLastDayOfMonth(new Date(selectedYear, month + 1, 0).getDate());
 
   };
-  
 
   return (
     <>
@@ -52,7 +52,7 @@ function DateSelection() {
                           variant="dark"
                           text="light"
                           className={selectedMonth === dateSelectionData[key].number ? "monthButton active" : "monthButton"}
-                          onClick={() => updateDaysInMonth(dateSelectionData[key].number - 1)}
+                          onClick={() => updateDaysInMonth(dateSelectionData[key].number - 1)} // Subtract 1 to get the correct month
                         >
                           {dateSelectionData[key].short}
                         </Button>

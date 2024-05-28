@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import DaysOfTheMonth from './DaysOfTheMonth';
 
 import dateSelectionData from '../data/dateSelectionData.json';
 
@@ -16,13 +17,24 @@ function DateSelection() {
   const day = today.getDate();
 
   // get the day of the week that the first day of the month starts on
-  const firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(today.getFullYear(), today.getMonth(), 1).getDay());
 
   // get the last day of the month
-  const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate());
 
+  const [selectedYear,] = useState(today.getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(month);
   const [selectedDay, setSelectedDay] = useState(day);
+
+  const updateDaysInMonth = (month) => {
+    setSelectedMonth(month + 1);
+    setSelectedDay(1);
+
+    setFirstDayOfWeek(new Date(selectedYear, month, 1).getDay());
+    setLastDayOfMonth(new Date(selectedYear, month + 1, 0).getDate());
+
+  };
+  
 
   return (
     <>
@@ -40,7 +52,7 @@ function DateSelection() {
                           variant="dark"
                           text="light"
                           className={selectedMonth === dateSelectionData[key].number ? "monthButton active" : "monthButton"}
-                          onClick={() => setSelectedMonth(dateSelectionData[key].number)}
+                          onClick={() => updateDaysInMonth(dateSelectionData[key].number - 1)}
                         >
                           {dateSelectionData[key].short}
                         </Button>
@@ -59,35 +71,12 @@ function DateSelection() {
               <Col xs={1} className="day text-center">F</Col>
               <Col xs={1} className="day text-center">S</Col>
           </Row>
-          {Array.from({ length: 6 }).map((_, idx) => (
-              <Row key={idx} className="m-auto justify-content-between px-5 py-1 daysOfMonthRow">
-              {Array.from({ length: 7 }).map((_, idy) => (
-                  <Col key={(idx * 7) + idy + 1 - firstDayOfWeek} xs={1} className="p-0 text-center">
-                    <Button
-                      variant="dark"
-                      text="light"
-                      className={
-                        (idx * 7) + idy + 1 - firstDayOfWeek > 0 &&
-                        (idx * 7) + idy + 1 - firstDayOfWeek <= lastDayOfMonth
-                        ? (
-                          selectedDay === (idx * 7) + idy + 1 - firstDayOfWeek
-                          ? (
-                            "mt-2 dayButton active"
-                          ) : (
-                            "mt-2 dayButton"
-                          )
-                        ) : (
-                          "mt-2 dayButton d-none"
-                        )
-                      }
-                      onClick={() => setSelectedDay((idx * 7) + idy + 1 - firstDayOfWeek)}
-                    >
-                      {(idx * 7) + idy + 1 - firstDayOfWeek}
-                    </Button>
-                  </Col>
-              ))}
-              </Row>
-          ))}
+          <DaysOfTheMonth
+            selectedDay={selectedDay}
+            firstDayOfWeek={firstDayOfWeek}
+            lastDayOfMonth={lastDayOfMonth}
+            setSelectedDay={setSelectedDay}
+          />
         </Card.Body>
       </Card>
     </>

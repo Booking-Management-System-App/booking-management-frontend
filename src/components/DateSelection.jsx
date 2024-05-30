@@ -40,7 +40,7 @@ function DateSelection() {
     <>
       <Card bg="light" text="dark" className="dateSelectionCard mt-2 py-0 h-100">
         <Card.Body>
-          <Card.Title className="justify-content-between d-flex px-4"><p>Select a date</p><p>2024</p></Card.Title>
+          <Card.Title className="justify-content-between d-flex px-4 mb-3"><p className="m-0">Select a date</p><p className="m-0">2024</p></Card.Title>
             <Container>
             {Array.from({ length: 3 }).map((_, idx) => (
                 <Row key={idx} className="justify-content-center">

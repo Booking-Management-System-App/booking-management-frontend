@@ -12,6 +12,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import DateSelection from './components/DateSelection';
 import TimeSelection from './components/TimeSelection';
 import ConfirmAppointmentCard from './components/ConfirmAppointmentCard';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -58,7 +59,7 @@ function App() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <Row className="mh-100 mt-2">
+        <Row className="mh-100">
           <Col xs={6} className="d-flex flex-column">
             <DateSelection />
           </Col>
@@ -72,6 +73,7 @@ function App() {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   )
 }

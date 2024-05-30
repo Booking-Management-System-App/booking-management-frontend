@@ -13,7 +13,7 @@ function DaysOfTheMonth(props) {
   return (
     <>
       {Array.from({ length: 6 }).map((_, idx) => (
-        <Row key={idx} className="m-auto justify-content-between px-5 py-1 daysOfMonthRow">
+        <Row key={idx} className="m-auto justify-content-between px-5 pb-1 daysOfMonthRow">
         {Array.from({ length: 7 }).map((_, idy) => (
           <Col key={(idx * 7) + idy + 1 - firstDayOfWeek} xs={1} className="p-0 text-center">
             <Button
@@ -30,12 +30,19 @@ function DaysOfTheMonth(props) {
                     "mt-2 dayButton"
                   )
                 ) : (
-                  "mt-2 dayButton d-none"
+                  "mt-2 dayButton invisible"
                 )
               }
               onClick={() => setSelectedDay((idx * 7) + idy + 1 - firstDayOfWeek)}
             >
-              {(idx * 7) + idy + 1 - firstDayOfWeek}
+              {
+                (idx * 7) + idy + 1 - firstDayOfWeek > 0 &&
+                (idx * 7) + idy + 1 - firstDayOfWeek <= lastDayOfMonth
+                ? (
+                  (idx * 7) + idy + 1 - firstDayOfWeek
+                ) :
+                -1
+              }
             </Button>
           </Col>
         ))}

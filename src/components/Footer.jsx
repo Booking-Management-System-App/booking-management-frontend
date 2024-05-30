@@ -6,7 +6,7 @@ import '../styles/footer.css'; // Make sure to create this CSS file for styling
 
 function Footer() {
   return (
-    <footer className="footer mt-auto mx-0 py-3 bg-light">
+    <footer className="footer mt-auto mx-0 pt-0 bg-light">
       <Container>
       <Row>
           <Col className="text-center mb-2">

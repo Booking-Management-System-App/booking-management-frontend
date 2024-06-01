@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import FirstAppointmentModal from '../components/FirstAppointmentModal';
 import NavigationBar from '../components/NavigationBar';
 import DateSelection from '../components/DateSelection';
 import TimeSelection from '../components/TimeSelection';
@@ -33,6 +34,7 @@ function BookAppointmentsPage() {
 
   return (
     <>
+      <FirstAppointmentModal selectedTime={selectedTime} />
       <Container fluid className="app-container">
         <NavigationBar />
         <Row className="mh-100">

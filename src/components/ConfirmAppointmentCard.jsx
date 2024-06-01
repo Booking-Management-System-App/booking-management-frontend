@@ -30,7 +30,7 @@ function ConfirmAppointmentCard(props) {
             <Row>
               <Form.Group as={Col} controlId="firstNameInput">
                 <FloatingLabel
-                  controlId="floatingInputName"
+                  controlId="floatingInputFirstName"
                   label="First name"
                   className="mb-2"
                 >
@@ -39,7 +39,7 @@ function ConfirmAppointmentCard(props) {
               </Form.Group>
               <Form.Group as={Col} controlId="lastNameInput">
                 <FloatingLabel
-                  controlId="floatingInputName"
+                  controlId="floatingInputLastName"
                   label="Last name"
                   className="mb-2"
                 >

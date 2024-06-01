@@ -11,7 +11,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 
 function NavigationBar() {
 
-  const [loggedIn,] = useState(true);
+  const [loggedIn,] = useState(false);
 
   return (
     <>

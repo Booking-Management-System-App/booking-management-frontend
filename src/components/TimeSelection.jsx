@@ -10,7 +10,7 @@ import Card from 'react-bootstrap/Card';
 
 function TimeSelection(props) {
 
-  const {selectedTime, setSelectedTime, times} = props;
+  const {selectedTime, setSelectedTime, appointmentTimes} = props;
 
   return (
     <>
@@ -18,7 +18,7 @@ function TimeSelection(props) {
         <Card.Body>
           <Card.Title className="text-center">Select a time</Card.Title>
           <Row className="justify-content-center">
-            {times.map((time) => (
+            {appointmentTimes.map((time) => (
               <Col key={time} xs={3} className="mb-2 text-center">
                 <Button
                   variant="dark"
@@ -40,7 +40,7 @@ function TimeSelection(props) {
 TimeSelection.propTypes = {
   selectedTime: PropTypes.string,
   setSelectedTime: PropTypes.func,
-  times: PropTypes.array
+  appointmentTimes: PropTypes.array
 };
 
 export default TimeSelection;

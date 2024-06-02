@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 //import api from '../api/axiosConfig';
 import '../styles/dateSelection.css';
 
@@ -11,18 +12,20 @@ import DaysOfTheMonth from './DaysOfTheMonth';
 
 import dateSelectionData from '../data/dateSelectionData.json';
 
-function DateSelection() {
-  const today = new Date();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
+function DateSelection(props) {
+  // const today = new Date();
+  // const month = today.getMonth() + 1;
+  // const day = today.getDate();
+
+  const { year, month, day } = props;
 
   // get the day of the week that the first day of the month starts on
-  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(today.getFullYear(), today.getMonth(), 1).getDay());
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(year, month, day).getDay());
 
   // get the last day of the month
-  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate());
+  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(year, month + 1, 0).getDate());
 
-  const [selectedYear,] = useState(today.getFullYear());
+  const [selectedYear,] = useState(year);
   const [selectedMonth, setSelectedMonth] = useState(month);
   const [selectedDay, setSelectedDay] = useState(day);
 
@@ -82,5 +85,11 @@ function DateSelection() {
     </>
   );
 }
+
+DateSelection.propTypes = {
+  year: PropTypes.number,
+  month: PropTypes.number,
+  day: PropTypes.number
+};
 
 export default DateSelection;

@@ -12,6 +12,8 @@ function TimeSelection(props) {
 
   const {selectedTime, setSelectedTime, appointmentTimes} = props;
 
+
+
   return (
     <>
       <Card bg="light" text="dark" className="timeSelectionCard mt-2">

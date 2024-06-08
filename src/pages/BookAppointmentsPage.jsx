@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../App.css';
+import '../styles/bookAppointmentsPage.css';
 import api from '../api/axiosConfig';
 
 import Container from 'react-bootstrap/Container';
@@ -32,11 +33,20 @@ function BookAppointmentsPage() {
         setAvailableSlots(res.data);
 
         // Get the first available day, month, and time
-        const firstAvailableDateObject = new Date(res.data[0].date);
-        setSelectedYear(firstAvailableDateObject.getFullYear());
-        setSelectedMonth(firstAvailableDateObject.getMonth() + 1);
-        setSelectedDay(firstAvailableDateObject.getDate());
+        const dateSplit = res.data[0].date.split("-");
+        setSelectedYear(parseInt(dateSplit[0]));
+        setSelectedMonth(parseInt(dateSplit[1]) + 1);
+        setSelectedDay(parseInt(dateSplit[2]));
         setSelectedTime(res.data[0].startTime);
+
+        // Get the available appointment times
+        const times = [];
+        res.data.forEach(slot => {
+          if (!times.includes(slot.startTime)) {
+            times.push(slot.startTime);
+          }
+        });
+        setAppointmentTimes(times);
       })
       .catch(err => {
         console.log(err);
@@ -58,7 +68,12 @@ function BookAppointmentsPage() {
               </Col>
               <Col xs={6} className="d-flex flex-column pe-4 justify-content-between">
                 <Row className="timeSelectionRow h-50">
-                  <TimeSelection selectedTime={selectedTime} setSelectedTime={setSelectedTime} appointmentTimes={appointmentTimes} />
+                  <TimeSelection
+                    selectedTime={selectedTime}
+                    setSelectedTime={setSelectedTime}
+                    appointmentTimes={appointmentTimes}
+                    availableSlots={availableSlots}
+                  />
                 </Row>
                 <Row className="confirmAppointmentRow">
                   <ConfirmAppointmentCard selectedTime={selectedTime}/>

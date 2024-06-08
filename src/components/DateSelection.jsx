@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 //import api from '../api/axiosConfig';
 import '../styles/dateSelection.css';
@@ -17,7 +17,7 @@ function DateSelection(props) {
   // const month = today.getMonth() + 1;
   // const day = today.getDate();
 
-  const { year, month, day } = props;
+  const { year, month, day, availableSlots, setAppointmentTimes } = props;
 
   // get the day of the week that the first day of the month starts on
   const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(year, month, day).getDay());
@@ -38,6 +38,22 @@ function DateSelection(props) {
     setLastDayOfMonth(new Date(selectedYear, month + 1, 0).getDate());
 
   };
+
+  // Filter the available slots to get the available times for the selected day
+  useEffect(() => {
+    console.log("available slots in DateSelection: ", availableSlots);
+    const times = availableSlots?.filter(slot => {
+      console.log("slot: ", slot);
+      const dateSplit = slot.date?.split("-");
+      return parseInt(dateSplit[0]) === selectedYear
+        && parseInt(dateSplit[1]) === selectedMonth -1
+        && parseInt(dateSplit[2]) === selectedDay;
+    }).map(slot => slot.startTime);
+
+    console.log(times);
+
+    setAppointmentTimes(times);
+  }, [selectedYear, selectedMonth, selectedDay, availableSlots, setAppointmentTimes]);
 
   return (
     <>
@@ -89,7 +105,9 @@ function DateSelection(props) {
 DateSelection.propTypes = {
   year: PropTypes.number,
   month: PropTypes.number,
-  day: PropTypes.number
+  day: PropTypes.number,
+  availableSlots: PropTypes.array,
+  setAppointmentTimes: PropTypes.func
 };
 
 export default DateSelection;

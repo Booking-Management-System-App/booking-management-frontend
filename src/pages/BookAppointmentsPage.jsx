@@ -64,7 +64,13 @@ function BookAppointmentsPage() {
             <NavigationBar />
             <Row className="mh-100">
               <Col xs={6} className="d-flex flex-column">
-                <DateSelection year={selectedYear} month={selectedMonth} day={selectedDay} />
+                <DateSelection
+                  year={selectedYear}
+                  month={selectedMonth}
+                  day={selectedDay}
+                  availableSlots={availableSlots}
+                  setAppointmentTimes={setAppointmentTimes}
+                />
               </Col>
               <Col xs={6} className="d-flex flex-column pe-4 justify-content-between">
                 <Row className="timeSelectionRow h-50">
@@ -72,7 +78,6 @@ function BookAppointmentsPage() {
                     selectedTime={selectedTime}
                     setSelectedTime={setSelectedTime}
                     appointmentTimes={appointmentTimes}
-                    availableSlots={availableSlots}
                   />
                 </Row>
                 <Row className="confirmAppointmentRow">

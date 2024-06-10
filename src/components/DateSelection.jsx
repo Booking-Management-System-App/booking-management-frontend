@@ -14,19 +14,22 @@ import dateSelectionData from '../data/dateSelectionData.json';
 
 function DateSelection(props) {
 
-  const { year, month, day, availableSlots, setAppointmentTimes } = props;
+  const {
+    selectedYear,
+    selectedMonth,
+    setSelectedMonth,
+    selectedDay,
+    setSelectedDay,
+    availableSlots,
+    setAppointmentTimes } = props;
 
   // get the day of the week that the first day of the month starts on.
   // Date() uses 0-indexed months, so subtract 1
   // from the month to get the correct month
-  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(year, month - 1, day).getDay());
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(selectedYear, selectedMonth - 1, selectedDay).getDay());
 
   // get the last day of the month
-  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(year, month, 0).getDate());
-
-  const [selectedYear,] = useState(year);
-  const [selectedMonth, setSelectedMonth] = useState(month);
-  const [selectedDay, setSelectedDay] = useState(day);
+  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(selectedYear, selectedMonth, 0).getDate());
 
   // Update the days in the month when a new month is selected
   const updateDaysInMonth = (month) => {
@@ -99,9 +102,11 @@ function DateSelection(props) {
 }
 
 DateSelection.propTypes = {
-  year: PropTypes.number,
-  month: PropTypes.number,
-  day: PropTypes.number,
+  selectedYear: PropTypes.number,
+  selectedMonth: PropTypes.number,
+  setSelectedMonth: PropTypes.func,
+  selectedDay: PropTypes.number,
+  setSelectedDay: PropTypes.func,
   availableSlots: PropTypes.array,
   setAppointmentTimes: PropTypes.func
 };

@@ -65,9 +65,11 @@ function BookAppointmentsPage() {
             <Row className="mh-100">
               <Col xs={6} className="d-flex flex-column">
                 <DateSelection
-                  year={selectedYear}
-                  month={selectedMonth}
-                  day={selectedDay}
+                  selectedYear={selectedYear}
+                  selectedMonth={selectedMonth}
+                  setSelectedMonth={setSelectedMonth}
+                  selectedDay={selectedDay}
+                  setSelectedDay={setSelectedDay}
                   availableSlots={availableSlots}
                   setAppointmentTimes={setAppointmentTimes}
                 />

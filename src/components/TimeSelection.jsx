@@ -18,21 +18,27 @@ function TimeSelection(props) {
     <>
       <Card bg="light" text="dark" className="timeSelectionCard mt-2">
         <Card.Body>
-          <Card.Title className="text-center">Select a time</Card.Title>
-          <Row className="justify-content-center">
-            {appointmentTimes.map((time) => (
-              <Col key={time} xs={3} className="mb-2 text-center">
-                <Button
-                  variant="dark"
-                  text="light"
-                  className={selectedTime === time ? "timeButton active" : "timeButton"}
-                  onClick={() => setSelectedTime(time)}
-                >
-                  {time}
-                </Button>
-              </Col>
-              ))}
-          </Row>
+          { appointmentTimes.length > 0 ? (
+            <>
+            <Card.Title className="text-center">Select a time</Card.Title>
+            <Row className="justify-content-center">
+              {appointmentTimes.map((time) => (
+                <Col key={time} xs={3} className="mb-2 text-center">
+                  <Button
+                    variant="dark"
+                    text="light"
+                    className={selectedTime === time ? "timeButton active" : "timeButton"}
+                    onClick={() => setSelectedTime(time)}
+                  >
+                    {time}
+                  </Button>
+                </Col>
+                ))}
+            </Row>
+            </>
+          ) : (
+            <Card.Title className="text-center">No times available</Card.Title>
+          )}
         </Card.Body>
       </Card>
     </>

@@ -21,7 +21,8 @@ function DateSelection(props) {
     selectedDay,
     setSelectedDay,
     availableSlots,
-    setAppointmentTimes } = props;
+    setAppointmentTimes,
+    setSelectedTime } = props;
 
   // get the day of the week that the first day of the month starts on.
   // Date() uses 0-indexed months, so subtract 1
@@ -52,7 +53,8 @@ function DateSelection(props) {
     }).map(slot => slot.startTime);
 
     setAppointmentTimes(times);
-  }, [selectedYear, selectedMonth, selectedDay, availableSlots, setAppointmentTimes]);
+    setSelectedTime(times.length > 0 ? times[0] : "");
+  }, [selectedYear, selectedMonth, selectedDay, availableSlots, setAppointmentTimes, setSelectedTime]);
 
   return (
     <>
@@ -108,7 +110,8 @@ DateSelection.propTypes = {
   selectedDay: PropTypes.number,
   setSelectedDay: PropTypes.func,
   availableSlots: PropTypes.array,
-  setAppointmentTimes: PropTypes.func
+  setAppointmentTimes: PropTypes.func,
+  setSelectedTime: PropTypes.func
 };
 
 export default DateSelection;

@@ -25,6 +25,7 @@ function BookAppointmentsPage() {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   // Get the available appointment times from the server
   useEffect(() => {
@@ -47,15 +48,17 @@ function BookAppointmentsPage() {
           }
         });
         setAppointmentTimes(times);
+        setIsDataLoaded(true);
       })
       .catch(err => {
         console.log(err);
+        isDataLoaded(true);
       });
-  }, []);
+  }, [isDataLoaded]);
 
   return (
     <>
-      {selectedTime === "" ? (
+      {!isDataLoaded ? (
         <Spinner animation="border" variant="light" role="status" className="loadingSpinner" />
         ) : (
         <>
@@ -72,6 +75,7 @@ function BookAppointmentsPage() {
                   setSelectedDay={setSelectedDay}
                   availableSlots={availableSlots}
                   setAppointmentTimes={setAppointmentTimes}
+                  setSelectedTime={setSelectedTime}
                 />
               </Col>
               <Col xs={6} className="d-flex flex-column pe-4 justify-content-between">

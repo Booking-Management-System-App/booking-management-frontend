@@ -35,7 +35,7 @@ function BookAppointmentsPage() {
         // Get the first available day, month, and time
         const dateSplit = res.data[0].date.split("-");
         setSelectedYear(parseInt(dateSplit[0]));
-        setSelectedMonth(parseInt(dateSplit[1]) + 1);
+        setSelectedMonth(parseInt(dateSplit[1]));
         setSelectedDay(parseInt(dateSplit[2]));
         setSelectedTime(res.data[0].startTime);
 

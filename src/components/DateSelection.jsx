@@ -13,17 +13,16 @@ import DaysOfTheMonth from './DaysOfTheMonth';
 import dateSelectionData from '../data/dateSelectionData.json';
 
 function DateSelection(props) {
-  // const today = new Date();
-  // const month = today.getMonth() + 1;
-  // const day = today.getDate();
 
   const { year, month, day, availableSlots, setAppointmentTimes } = props;
 
-  // get the day of the week that the first day of the month starts on
-  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(year, month, day).getDay());
+  // get the day of the week that the first day of the month starts on.
+  // Date() uses 0-indexed months, so subtract 1
+  // from the month to get the correct month
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(year, month - 1, day).getDay());
 
   // get the last day of the month
-  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(year, month + 1, 0).getDate());
+  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(year, month, 0).getDate());
 
   const [selectedYear,] = useState(year);
   const [selectedMonth, setSelectedMonth] = useState(month);
@@ -31,26 +30,23 @@ function DateSelection(props) {
 
   // Update the days in the month when a new month is selected
   const updateDaysInMonth = (month) => {
-    setSelectedMonth(month + 1);
+    setSelectedMonth(month);
     setSelectedDay(1);
 
-    setFirstDayOfWeek(new Date(selectedYear, month, 1).getDay());
-    setLastDayOfMonth(new Date(selectedYear, month + 1, 0).getDate());
-
+    // Date() uses 0-indexed months, so subtract 1
+    // from the month to get the correct month
+    setFirstDayOfWeek(new Date(selectedYear, month - 1, 1).getDay());
+    setLastDayOfMonth(new Date(selectedYear, month, 0).getDate());
   };
 
   // Filter the available slots to get the available times for the selected day
   useEffect(() => {
-    console.log("available slots in DateSelection: ", availableSlots);
     const times = availableSlots?.filter(slot => {
-      console.log("slot: ", slot);
       const dateSplit = slot.date?.split("-");
       return parseInt(dateSplit[0]) === selectedYear
-        && parseInt(dateSplit[1]) === selectedMonth -1
+        && parseInt(dateSplit[1]) === selectedMonth
         && parseInt(dateSplit[2]) === selectedDay;
     }).map(slot => slot.startTime);
-
-    console.log(times);
 
     setAppointmentTimes(times);
   }, [selectedYear, selectedMonth, selectedDay, availableSlots, setAppointmentTimes]);
@@ -71,7 +67,7 @@ function DateSelection(props) {
                           variant="dark"
                           text="light"
                           className={selectedMonth === dateSelectionData[key].number ? "monthButton active" : "monthButton"}
-                          onClick={() => updateDaysInMonth(dateSelectionData[key].number - 1)} // Subtract 1 to get the correct month
+                          onClick={() => updateDaysInMonth(dateSelectionData[key].number)} // Subtract 1 to get the correct month
                         >
                           {dateSelectionData[key].short}
                         </Button>

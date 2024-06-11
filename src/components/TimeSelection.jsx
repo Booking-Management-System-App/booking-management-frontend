@@ -10,27 +10,35 @@ import Card from 'react-bootstrap/Card';
 
 function TimeSelection(props) {
 
-  const {selectedTime, setSelectedTime, times} = props;
+  const {selectedTime, setSelectedTime, appointmentTimes} = props;
+
+
 
   return (
     <>
       <Card bg="light" text="dark" className="timeSelectionCard mt-2">
         <Card.Body>
-          <Card.Title className="text-center">Select a time</Card.Title>
-          <Row className="justify-content-center">
-            {times.map((time) => (
-              <Col key={time} xs={3} className="mb-2 text-center">
-                <Button
-                  variant="dark"
-                  text="light"
-                  className={selectedTime === time ? "timeButton active" : "timeButton"}
-                  onClick={() => setSelectedTime(time)}
-                >
-                  {time}
-                </Button>
-              </Col>
-              ))}
-          </Row>
+          { appointmentTimes.length > 0 ? (
+            <>
+            <Card.Title className="text-center">Select a time</Card.Title>
+            <Row className="justify-content-center">
+              {appointmentTimes.map((time) => (
+                <Col key={time} xs={3} className="mb-2 text-center">
+                  <Button
+                    variant="dark"
+                    text="light"
+                    className={selectedTime === time ? "timeButton active" : "timeButton"}
+                    onClick={() => setSelectedTime(time)}
+                  >
+                    {time}
+                  </Button>
+                </Col>
+                ))}
+            </Row>
+            </>
+          ) : (
+            <Card.Title className="text-center">No times available</Card.Title>
+          )}
         </Card.Body>
       </Card>
     </>
@@ -40,7 +48,7 @@ function TimeSelection(props) {
 TimeSelection.propTypes = {
   selectedTime: PropTypes.string,
   setSelectedTime: PropTypes.func,
-  times: PropTypes.array
+  appointmentTimes: PropTypes.array
 };
 
 export default TimeSelection;

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 //import api from '../api/axiosConfig';
 import '../styles/dateSelection.css';
 
@@ -11,30 +12,49 @@ import DaysOfTheMonth from './DaysOfTheMonth';
 
 import dateSelectionData from '../data/dateSelectionData.json';
 
-function DateSelection() {
-  const today = new Date();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
+function DateSelection(props) {
 
-  // get the day of the week that the first day of the month starts on
-  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(today.getFullYear(), today.getMonth(), 1).getDay());
+  const {
+    selectedYear,
+    selectedMonth,
+    setSelectedMonth,
+    selectedDay,
+    setSelectedDay,
+    availableSlots,
+    setAppointmentTimes,
+    setSelectedTime } = props;
+
+  // get the day of the week that the first day of the month starts on.
+  // Date() uses 0-indexed months, so subtract 1
+  // from the month to get the correct month
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState(new Date(selectedYear, selectedMonth - 1, selectedDay).getDay());
 
   // get the last day of the month
-  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate());
-
-  const [selectedYear,] = useState(today.getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(month);
-  const [selectedDay, setSelectedDay] = useState(day);
+  const [lastDayOfMonth, setLastDayOfMonth] = useState(new Date(selectedYear, selectedMonth, 0).getDate());
 
   // Update the days in the month when a new month is selected
   const updateDaysInMonth = (month) => {
-    setSelectedMonth(month + 1);
+    setSelectedMonth(month);
     setSelectedDay(1);
 
-    setFirstDayOfWeek(new Date(selectedYear, month, 1).getDay());
-    setLastDayOfMonth(new Date(selectedYear, month + 1, 0).getDate());
-
+    // Date() uses 0-indexed months, so subtract 1
+    // from the month to get the correct month
+    setFirstDayOfWeek(new Date(selectedYear, month - 1, 1).getDay());
+    setLastDayOfMonth(new Date(selectedYear, month, 0).getDate());
   };
+
+  // Filter the available slots to get the available times for the selected day
+  useEffect(() => {
+    const times = availableSlots?.filter(slot => {
+      const dateSplit = slot.date?.split("-");
+      return parseInt(dateSplit[0]) === selectedYear
+        && parseInt(dateSplit[1]) === selectedMonth
+        && parseInt(dateSplit[2]) === selectedDay;
+    }).map(slot => slot.startTime);
+
+    setAppointmentTimes(times);
+    setSelectedTime(times.length > 0 ? times[0] : "");
+  }, [selectedYear, selectedMonth, selectedDay, availableSlots, setAppointmentTimes, setSelectedTime]);
 
   return (
     <>
@@ -52,7 +72,7 @@ function DateSelection() {
                           variant="dark"
                           text="light"
                           className={selectedMonth === dateSelectionData[key].number ? "monthButton active" : "monthButton"}
-                          onClick={() => updateDaysInMonth(dateSelectionData[key].number - 1)} // Subtract 1 to get the correct month
+                          onClick={() => updateDaysInMonth(dateSelectionData[key].number)} // Subtract 1 to get the correct month
                         >
                           {dateSelectionData[key].short}
                         </Button>
@@ -82,5 +102,16 @@ function DateSelection() {
     </>
   );
 }
+
+DateSelection.propTypes = {
+  selectedYear: PropTypes.number,
+  selectedMonth: PropTypes.number,
+  setSelectedMonth: PropTypes.func,
+  selectedDay: PropTypes.number,
+  setSelectedDay: PropTypes.func,
+  availableSlots: PropTypes.array,
+  setAppointmentTimes: PropTypes.func,
+  setSelectedTime: PropTypes.func
+};
 
 export default DateSelection;

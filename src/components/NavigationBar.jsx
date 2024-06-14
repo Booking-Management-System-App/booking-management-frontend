@@ -2,6 +2,7 @@ import { useState } from 'react';
 //import PropTypes from 'prop-types';
 //import api from '../api/axiosConfig';
 
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -13,6 +14,8 @@ function NavigationBar() {
 
   const [loggedIn,] = useState(false);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -21,8 +24,8 @@ function NavigationBar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#myAppointments">My Apppointments</Nav.Link>
+                <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
+                <Nav.Link onClick={() => navigate("/my-appointments")}>My Apppointments</Nav.Link>
               </Nav>
               <Nav className="ms-auto">
                 {loggedIn ? (

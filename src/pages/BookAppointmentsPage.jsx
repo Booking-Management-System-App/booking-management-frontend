@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import '../App.css';
 import '../styles/bookAppointmentsPage.css';
 import api from '../api/axiosConfig';
 
@@ -62,7 +61,12 @@ function BookAppointmentsPage() {
         <Spinner animation="border" variant="light" role="status" className="loadingSpinner" />
         ) : (
         <>
-          <FirstAppointmentModal selectedTime={selectedTime} />
+          <FirstAppointmentModal
+            selectedYear={selectedYear}
+            selectedMonth={selectedMonth}
+            selectedDay={selectedDay}
+            selectedTime={selectedTime}
+          />
           <Container fluid className="app-container">
             <NavigationBar />
             <Row className="mh-100">
@@ -87,7 +91,7 @@ function BookAppointmentsPage() {
                   />
                 </Row>
                 <Row className="confirmAppointmentRow">
-                  <ConfirmAppointmentCard selectedTime={selectedTime}/>
+                  <ConfirmAppointmentCard selectedTime={selectedTime} />
                 </Row>
               </Col>
             </Row>

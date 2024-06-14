@@ -5,7 +5,12 @@ import Modal from 'react-bootstrap/Modal';
 import { FaCheck } from "react-icons/fa";
 
 function FirstAppointmentModal(props) {
-  const { selectedTime } = props;
+  const {
+    selectedYear,
+    selectedMonth,
+    selectedDay,
+    selectedTime } = props;
+
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
@@ -20,8 +25,9 @@ function FirstAppointmentModal(props) {
       <Modal.Header>
         <Modal.Title>Appointment</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="m-auto">
-        The first available appointment is at {selectedTime}.
+      <Modal.Body>
+        <p>The first available appointment is on:</p>
+        <p className="text-center m-0 fw-bold">{new Date(selectedYear, selectedMonth - 1, selectedDay).toDateString()} at {selectedTime}.</p>
       </Modal.Body>
       <Modal.Footer className="m-auto">
         <Button variant="dark" onClick={handleClose}>
@@ -33,6 +39,9 @@ function FirstAppointmentModal(props) {
 }
 
 FirstAppointmentModal.propTypes = {
+  selectedYear: PropTypes.number,
+  selectedMonth: PropTypes.number,
+  selectedDay: PropTypes.number,
   selectedTime: PropTypes.string,
 };
 

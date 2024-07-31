@@ -9,11 +9,15 @@ function FirstAppointmentModal(props) {
     selectedYear,
     selectedMonth,
     selectedDay,
-    selectedTime } = props;
+    selectedTime,
+    setIsFirstPageVisit } = props;
 
   const [show, setShow] = useState(true);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setIsFirstPageVisit(false);
+    setShow(false);
+  };
 
   return (
     <Modal
@@ -43,6 +47,7 @@ FirstAppointmentModal.propTypes = {
   selectedMonth: PropTypes.number,
   selectedDay: PropTypes.number,
   selectedTime: PropTypes.string,
+  setIsFirstPageVisit: PropTypes.func
 };
 
 export default FirstAppointmentModal;

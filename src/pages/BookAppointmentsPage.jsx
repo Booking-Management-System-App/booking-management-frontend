@@ -25,6 +25,7 @@ function BookAppointmentsPage() {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isFirstPageVisit, setIsFirstPageVisit] = useState(true);
 
   // Get the available appointment times from the server
   useEffect(() => {
@@ -61,12 +62,15 @@ function BookAppointmentsPage() {
         <Spinner animation="border" variant="light" role="status" className="loadingSpinner" />
         ) : (
         <>
-          <FirstAppointmentModal
-            selectedYear={selectedYear}
-            selectedMonth={selectedMonth}
-            selectedDay={selectedDay}
-            selectedTime={selectedTime}
-          />
+          {isFirstPageVisit && (
+            <FirstAppointmentModal
+              selectedYear={selectedYear}
+              selectedMonth={selectedMonth}
+              selectedDay={selectedDay}
+              selectedTime={selectedTime}
+              setIsFirstPageVisit={setIsFirstPageVisit}
+            />
+          )}
           <Container fluid className="app-container">
             <NavigationBar />
             <Row className="mh-100">

@@ -34,6 +34,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           VITE_AZURE_FUNCTIONS_API_URL: ${{ secrets.VITE_AZURE_FUNCTIONS_API_URL }}
+          VITE_AZURE_FUNCTIONS_API_KEY: ${{ secrets.VITE_AZURE_FUNCTIONS_API_KEY }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
